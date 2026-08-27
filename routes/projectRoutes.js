@@ -1,18 +1,10 @@
 const router = require("express").Router();
+const ndaAccess = require("../middleware/ndaAccess");
+const projectController = require("../controllers/projectController");
 
-const {
-  getProjects,
-  createProject,
-  updateProject,
-  deleteProject,
-} = require("../controllers/projectController");
-
-router.get("/", getProjects);
-
-router.post("/", createProject);
-
-router.put("/:id", updateProject);
-
-router.delete("/:id", deleteProject);
+router.get("/", ndaAccess, projectController.getAll);
+router.post("/", projectController.create);
+router.put("/:id", projectController.update);
+router.delete("/:id", projectController.remove);
 
 module.exports = router;
